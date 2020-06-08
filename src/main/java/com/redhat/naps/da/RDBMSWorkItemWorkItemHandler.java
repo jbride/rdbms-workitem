@@ -99,10 +99,9 @@ public class RDBMSWorkItemWorkItemHandler extends AbstractLogOrThrowWorkItemHand
                 conn = ds.getConnection();
                 Statement sObj = conn.createStatement();
 
-                try (ResultSet rs = sObj.executeQuery(sqlPrefix + employeeId.intValue());) {
-                    while (rs.next()) {
-                        fullName = rs.getString(1);
-                    }
+                ResultSet rs = sObj.executeQuery(sqlPrefix + employeeId.intValue());
+                while (rs.next()) {
+                    fullName = rs.getString(1);
                 }
 
             } catch (SQLException e) {
