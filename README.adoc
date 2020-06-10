@@ -1,0 +1,14 @@
+-----
+   [
+     "name" : "RDBMSWorkItem",
+     "parameters" : [
+         "id" : "new IntegerDataType()"
+     ],
+     "results" : [
+         "resultString" : "new StringDataType()",
+     ],
+     "displayName" : "RDBMSWorkItem",
+     "icon" : "defaultmilestoneicon.png",
+     "category" : "RDBMSWorkItem"
+   ]
+-----

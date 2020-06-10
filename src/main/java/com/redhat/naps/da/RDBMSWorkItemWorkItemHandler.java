@@ -46,13 +46,13 @@ import org.jbpm.process.workitem.core.util.WidMavenDepends;
         category = "rdbms-workitem",
         icon = "RDBMSWorkItem.png",
         parameters={
-            @WidParameter(name="userId", type="new IntegerDataType()", runtimeType="Integer", required = true)
+            @WidParameter(name="id", type="new IntegerDataType()", runtimeType="Integer", required = true)
         },
         results={
-            @WidResult(name="employeeId")
+            @WidResult(name="result")
         },
         mavenDepends={
-            @WidMavenDepends(group="com.redhat.naps.da", artifact="rdbms-workitem", version="1.0.1")
+            @WidMavenDepends(group="com.redhat.naps.da", artifact="rdbms-workitem", version="1.0.3")
         },
         serviceInfo = @WidService(category = "rdbms-workitem", description = "${description}",
                 keywords = "",
@@ -90,18 +90,18 @@ public class RDBMSWorkItemWorkItemHandler extends AbstractLogOrThrowWorkItemHand
         try {
             RequiredParameterValidator.validate(this.getClass(), workItem);
 
-            Integer userId = (Integer) workItem.getParameter("userId");
-            System.out.println("executeWorkItem() : userId  = "+userId);
+            Integer id = (Integer) workItem.getParameter("id");
+            System.out.println("executeWorkItem() : id  = "+id);
 
-            String fullName = null;
+            String result = null;
             Connection conn = null;
             try {
                 conn = ds.getConnection();
                 Statement sObj = conn.createStatement();
 
-                ResultSet rs = sObj.executeQuery(sqlPrefix + userId.intValue());
+                ResultSet rs = sObj.executeQuery(sqlPrefix + id.intValue());
                 while (rs.next()) {
-                    fullName = rs.getString(1);
+                    result = rs.getString(1);
                 }
 
             } catch (SQLException e) {
@@ -118,7 +118,7 @@ public class RDBMSWorkItemWorkItemHandler extends AbstractLogOrThrowWorkItemHand
 
             // return results
             Map<String, Object> results = new HashMap<String, Object>();
-            results.put("employeeId", fullName);
+            results.put("result", result);
 
 
             manager.completeWorkItem(workItem.getId(), results);
