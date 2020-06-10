@@ -52,7 +52,7 @@ import org.jbpm.process.workitem.core.util.WidMavenDepends;
             @WidResult(name="employeeId")
         },
         mavenDepends={
-            @WidMavenDepends(group="org.jbpm.contrib", artifact="rdbms-workitem", version="7.30.0.Final-redhat-00003")
+            @WidMavenDepends(group="com.redhat.naps.da", artifact="rdbms-workitem", version="1.0.1")
         },
         serviceInfo = @WidService(category = "rdbms-workitem", description = "${description}",
                 keywords = "",
