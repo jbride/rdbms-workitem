@@ -46,10 +46,10 @@ import org.jbpm.process.workitem.core.util.WidMavenDepends;
         category = "rdbms-workitem",
         icon = "RDBMSWorkItem.png",
         parameters={
-            @WidParameter(name="employeeId", type="new IntegerDataType()", runtimeType="Integer", required = true)
+            @WidParameter(name="userId", type="new IntegerDataType()", runtimeType="Integer", required = true)
         },
         results={
-            @WidResult(name="employeeName")
+            @WidResult(name="employeeId")
         },
         mavenDepends={
             @WidMavenDepends(group="org.jbpm.contrib", artifact="rdbms-workitem", version="7.30.0.Final-redhat-00003")
@@ -90,8 +90,8 @@ public class RDBMSWorkItemWorkItemHandler extends AbstractLogOrThrowWorkItemHand
         try {
             RequiredParameterValidator.validate(this.getClass(), workItem);
 
-            Integer employeeId = (Integer) workItem.getParameter("employeeId");
-            System.out.println("executeWorkItem() : employeeId  = "+employeeId);
+            Integer userId = (Integer) workItem.getParameter("userId");
+            System.out.println("executeWorkItem() : userId  = "+userId);
 
             String fullName = null;
             Connection conn = null;
@@ -99,7 +99,7 @@ public class RDBMSWorkItemWorkItemHandler extends AbstractLogOrThrowWorkItemHand
                 conn = ds.getConnection();
                 Statement sObj = conn.createStatement();
 
-                ResultSet rs = sObj.executeQuery(sqlPrefix + employeeId.intValue());
+                ResultSet rs = sObj.executeQuery(sqlPrefix + userId.intValue());
                 while (rs.next()) {
                     fullName = rs.getString(1);
                 }
@@ -118,7 +118,7 @@ public class RDBMSWorkItemWorkItemHandler extends AbstractLogOrThrowWorkItemHand
 
             // return results
             Map<String, Object> results = new HashMap<String, Object>();
-            results.put("employeeName", fullName);
+            results.put("employeeId", fullName);
 
 
             manager.completeWorkItem(workItem.getId(), results);
