@@ -3,34 +3,22 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
     xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.jbpm.contrib</groupId>
+    <artifactId>workitems</artifactId>
+    <version>7.30.0.Final-redhat-00003</version>
+  </parent>
 
-  <groupId>com.redhat.naps.da</groupId>
   <artifactId>rdbms-workitem</artifactId>
-  <version>1.0.3</version>
   <name>rdbms-workitem</name>
   <description>Workitem Desciption</description>
   <organization>
     <name>organization</name>
   </organization>
   <properties>
-    <version.org.kie>7.30.0.Final-redhat-00003</version.org.kie>
     <maven.compiler.source>1.6</maven.compiler.source>
     <maven.compiler.target>1.6</maven.compiler.target>
   </properties>
-
-  <!-- https://github.com/kiegroup/jbpm/pull/1652 -->
-  <!-- https://issues.redhat.com/browse/JBPM-8995 -->
-  <dependencyManagement>
-    <dependencies>
-        <dependency>
-            <groupId>org.kie</groupId>
-            <artifactId>kie-platform-bom</artifactId>
-            <version>${version.org.kie}</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-    </dependencies>
-  </dependencyManagement>
 
   <dependencies>
     <dependency>
@@ -51,7 +39,6 @@
     <dependency>
       <groupId>org.jbpm.contrib</groupId>
       <artifactId>template-resources</artifactId>
-      <version>${version.org.kie}</version>
       <scope>provided</scope>
     </dependency>
 
@@ -99,7 +86,7 @@
         <version>1.5</version>
         <configuration>
           <resourceBundles>
-            <resourceBundle>org.jbpm.contrib:template-resources:${version.org.kie}</resourceBundle>
+            <resourceBundle>${project.groupId}:template-resources:${project.version}</resourceBundle>
           </resourceBundles>
         </configuration>
         <executions>
